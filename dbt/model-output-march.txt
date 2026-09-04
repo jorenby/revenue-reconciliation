@@ -1,0 +1,16 @@
+fct_mrr_by_account_month, March 2026
+
+account            | sf_mrr | billing_mrr | billing_status | days_past_due | mrr_usd | disputed | recon_case       | in_scope | exclusion_reason        
+-------------------+--------+-------------+----------------+---------------+---------+----------+------------------+----------+-------------------------
+(product only)     | None   | None        | None           | None          | 0.0     | 0.0      | product_only     | True     | None                    
+Aspen Collective   | 1450.0 | 1450.0      | active         | 0             | 1450.0  | 0.0      | matches          | True     | None                    
+Marin Group        | 2100.0 | 0.0         | canceled       | 0             | 0.0     | 2100.0   | status_conflict  | True     | None                    
+Harborview RE      | None   | 980.0       | active         | 0             | 980.0   | 980.0    | billing_only     | True     | None                    
+Sunbelt Partners   | 3200.0 | 4050.0      | active         | 0             | 4050.0  | 850.0    | amount_mismatch  | True     | None                    
+Sunbelt Partners   | 0.0    | None        | None           | None          | 0.0     | 0.0      | salesforce_only  | False    | salesforce_soft_deleted 
+Cedar & Co         | 1100.0 | 1100.0      | active         | 0             | 1100.0  | 0.0      | matches          | True     | None                    
+Vieux Carre Realty | 1404.0 | 1404.0      | active         | 0             | 1404.0  | 0.0      | matches          | True     | None                    
+LP QA Account 4    | 500.0  | 0.0         | active         | 0             | 0.0     | 500.0    | amount_mismatch  | False    | internal_or_test_account
+Northshore Team    | 2750.0 | 2750.0      | past_due       | 61            | 2750.0  | 2750.0   | policy_undecided | True     | None                    
+
+In-scope March MRR: $11,734.00   contested: $6,680.00

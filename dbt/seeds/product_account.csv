@@ -1,0 +1,10 @@
+id,salesforce_account_id,billing_customer_id,plan_tier,status,site_published_at,is_internal
+PA1,SF1,BC1,Scale,active,2025-06-10,false
+PA2,SF2,BC2,Scale,active,2025-02-10,false
+PA3,SF3,BC3,Brand,active,2024-11-10,false
+PA4,SF4,BC4,All In,active,2024-09-10,false
+PA6,SF6,BC6,Brand,active,2025-01-10,false
+PA7,SF7,BC7,Scale,active,2025-03-10,false
+PA8,SF8,BC8,All In,active,2024-01-10,true
+PA9,SF9,BC9,Scale,suspended,2024-08-10,false
+PA10,,,Brand,active,2025-10-01,false

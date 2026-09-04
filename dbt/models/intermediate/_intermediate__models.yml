@@ -1,0 +1,48 @@
+version: 2
+
+models:
+  - name: int_account_spine
+    description: >
+      One row per resolved account. The only place identity resolution happens;
+      every other model translates its native key here. Carries each system's
+      key, presence flags, hierarchy, and scope.
+    columns:
+      - name: account_id
+        tests: [unique, not_null]
+      - name: is_in_scope
+        tests: [not_null]
+
+  - name: int_billing__invoice_month
+    description: >
+      One row per invoice per month it covers, with the amount spread evenly
+      across that period. Its own model because the spread is the billing logic
+      most likely to be wrong, and because anything else reporting revenue over
+      service months wants this table unchanged.
+    columns:
+      - name: months_covered
+        description: Calendar months the invoice period spans. 1 for monthly, 12 for annual.
+        tests: [not_null]
+      - name: native_per_month
+        description: total_native / months_covered, still in the billed currency.
+        tests: [not_null]
+      - name: amount_usd
+        description: native_per_month converted at the rate for the month it lands in.
+        tests: [not_null]
+      - name: invoice_status
+        tests: [not_null]
+
+  - name: int_billing__delinquency_by_account_month
+    description: >
+      Days past due per account-month, from the oldest unpaid open invoice as at
+      month end. Separate from revenue because collections consumes it without
+      any interest in MRR.
+    columns:
+      - name: days_past_due
+        tests: [not_null]
+
+  - name: int_billing__account_month
+    description: Billing's view of each account per month, in USD, already converted upstream.
+  - name: int_salesforce__account_month
+    description: Salesforce's view of each account per month, from contract terms.
+  - name: int_product__account_month
+    description: Provisioning state per account-month. Inferred for months before snapshotting.

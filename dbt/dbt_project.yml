@@ -1,0 +1,28 @@
+name: lp_recon
+version: '1.0'
+profile: lp_recon
+model-paths: ["models"]
+seed-paths: ["seeds"]
+test-paths: ["tests"]
+vars:
+  mrr_match_tolerance_usd: 1
+  past_due_review_days: 60
+  count_past_due_as_revenue: true
+seeds:
+  lp_recon:
+    # Pinned because an all-empty column gets inferred as a non-text type and
+    # then unions against an explicit varchar cast downstream. duckdb accepts it;
+    # I'd expect Snowflake not to, which is the kind of thing one engine hides.
+    +column_types:
+      parent_account_id: varchar
+      salesforce_account_id: varchar
+      billing_customer_id: varchar
+      end_date: date
+      canceled_at: date
+      paid_at: date
+
+models:
+  lp_recon:
+    +materialized: view
+    marts:
+      +materialized: table

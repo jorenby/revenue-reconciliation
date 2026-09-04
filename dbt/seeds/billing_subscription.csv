@@ -1,0 +1,9 @@
+id,customer_id,plan_code,quantity,unit_amount_cents,interval,status,current_period_start,current_period_end,canceled_at,currency
+BS1,BC1,scale,1,145000,month,active,2026-03-01,2026-03-31,,USD
+BS2,BC2,scale,1,210000,month,canceled,2026-03-01,2026-03-31,2026-03-14,USD
+BS3,BC3,brand,1,98000,month,active,2026-03-01,2026-03-31,,USD
+BS4,BC4,all_in,1,405000,month,active,2026-03-01,2026-03-31,,USD
+BS6,BC6,brand,1,1320000,year,active,2026-01-01,2026-12-31,,USD
+BS7,BC7,scale,1,130000,month,active,2026-03-01,2026-03-31,,EUR
+BS8,BC8,all_in,1,50000,month,active,2026-03-01,2026-03-31,,USD
+BS9,BC9,scale,1,275000,month,past_due,2026-03-01,2026-03-31,,USD

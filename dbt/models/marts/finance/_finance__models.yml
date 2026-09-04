@@ -1,0 +1,107 @@
+version: 2
+
+models:
+  - name: fct_mrr_by_account_month
+    description: >
+      One row per account per month. Each source system's view of recurring
+      revenue sits alongside the reconciled figure, the amount in dispute, and a
+      classification of how the systems disagree.
+
+      This is the company's MRR, not a parallel reconciliation number. The
+      executive dashboard, the board deck, and the semantic layer all read from
+      here, so any total can also report how much of itself is contested.
+
+    columns:
+
+      - name: account_month_key
+        description: Surrogate key. Exists so the grain is testable with a built-in.
+        tests:
+          - unique
+          - not_null
+
+      - name: account_id
+        description: Resolved account from int_account_spine, after de-duplication.
+        tests:
+          - not_null
+          - relationships:
+              to: ref('int_account_spine')
+              field: account_id
+
+      - name: month_start_date
+        description: First day of the month this row describes.
+        tests:
+          - not_null
+
+      - name: mrr_usd
+        description: >
+          Reconciled monthly recurring revenue in USD. Billing supplies it
+          wherever billing has an opinion; see the model for the two branches
+          that diverge and why.
+        tests:
+          - not_null
+
+      - name: disputed_mrr_usd
+        description: >
+          Dollars in this row that are not agreed. A spread for amount
+          disagreements, and the full billed amount where the disagreement is
+          about whether the revenue counts at all.
+        tests:
+          - not_null
+
+      - name: reconciliation_case
+        description: >
+          How the systems disagree, if they do. Independent of is_in_scope: an
+          account can be both out of scope and internally inconsistent.
+        tests:
+          - not_null
+          - accepted_values:
+              values:
+                - matches
+                - amount_mismatch
+                - billing_only
+                - salesforce_only
+                - product_only
+                - status_conflict
+                - policy_undecided
+
+      - name: is_in_scope
+        description: >
+          Whether this account counts toward company revenue. Internal, test,
+          and soft-deleted accounts remain as rows and are excluded by the metric
+          layer, so an exclusion is auditable rather than invisible.
+        tests:
+          - not_null
+
+      - name: exclusion_reason
+        description: Why an account is out of scope. Null when in scope.
+
+      - name: salesforce_mrr_usd
+        description: >
+          Salesforce's view, converted to USD. Null means Salesforce holds no
+          contract for that month, which is a different statement from zero.
+
+      - name: billing_mrr_usd
+        description: >
+          Billing's view, converted to USD and to a monthly amount. Derived from
+          invoices rather than the subscription record, so prior months are
+          reconstructable and annual prepay is spread across its term.
+
+      - name: billing_days_past_due
+        description: >
+          Days past due at month end, measured from the oldest unpaid invoice.
+          Drives the policy_undecided case.
+
+      - name: salesforce_status
+      - name: billing_status
+      - name: salesforce_plan_name
+      - name: product_status
+        description: Provisioning state. Inferred for months before snapshotting began.
+      - name: product_plan_tier
+      - name: parent_account_id
+        description: Salesforce account hierarchy. Present so rollups can avoid double counting.
+
+  - name: fct_mrr_reconciliation_exceptions
+    description: >
+      A lens over the fact filtered to rows in disagreement. Feeds RevOps
+      alerting. Deliberately not a source of its own, so an alert and the board
+      number can never be computed differently.

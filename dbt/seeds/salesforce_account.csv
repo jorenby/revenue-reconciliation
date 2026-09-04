@@ -1,0 +1,10 @@
+id,name,parent_account_id,is_deleted,created_date,type
+SF1,Aspen Collective,,false,2025-06-01,Customer
+SF2,Marin Group,,false,2025-02-01,Customer
+SF3,Harborview RE,,false,2024-11-01,Customer
+SF4,Sunbelt Partners,,false,2024-09-01,Customer
+SF5,Sunbelt Partners,,true,2024-09-02,Customer
+SF6,Cedar & Co,,false,2025-01-01,Customer
+SF7,Vieux Carre Realty,,false,2025-03-01,Customer
+SF8,LP QA Account 4,,false,2024-01-01,Customer
+SF9,Northshore Team,,false,2024-08-01,Customer

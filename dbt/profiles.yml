@@ -1,0 +1,7 @@
+lp_recon:
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      path: lp_recon.duckdb
+      threads: 1

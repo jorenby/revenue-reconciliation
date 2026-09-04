@@ -1,0 +1,10 @@
+id,account_id,plan_name,mrr,start_date,end_date,status,currency_iso_code,is_deleted,last_modified_date
+SS1,SF1,Scale,1450,2025-06-01,,Active,USD,false,2026-03-01
+SS2,SF2,Scale,2100,2025-02-01,,Active,USD,false,2026-01-05
+SS3,SF3,Brand,0,2024-11-01,2026-02-28,Churned,USD,false,2026-02-28
+SS4,SF4,Scale,3200,2024-09-01,,Active,USD,false,2025-12-01
+SS5,SF5,Scale,3200,2024-09-02,,Active,USD,true,2024-09-02
+SS6,SF6,Brand,1100,2025-01-01,,Active,USD,false,2026-01-01
+SS7,SF7,Scale,1300,2025-03-01,,Active,EUR,false,2026-02-01
+SS8,SF8,All In,500,2024-01-01,,Active,USD,false,2024-01-01
+SS9,SF9,Scale,2750,2024-08-01,,Active,USD,false,2025-11-01
